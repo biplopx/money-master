@@ -11,67 +11,75 @@
 </head>
 
 <body>
-  <section class="container w-3/4 mx-auto py-5">
+  <section class="container lg:w-full md:w-3/4 sm: mx-auto py-5">
     <h2 class="text-4xl text-center font-bold mb-5">Money<span class="text-blue-600"> Tracker</span></h2>
-    <div class="grid grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
       <div>
         <img src="./images/accounts-expenses.jpeg" class="w-full" alt="expenses">
       </div>
       <!--  Expenses Container -->
       <div class="bg-slate-100 p-8">
         <h4 class="text-2xl font-semibold text-center my-5">Income</h4>
-        <div class="w-3/4 mx-auto">
-          <div class="flex justify-center items-center gap-x-4">
-            <label class="w-1/4 text-right text-lg font-semibold">Income:</label>
-            <input class="bg-gray-200 w-3/4 basis-11/12 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
+        <div class="w-full mx-auto flex flex-col items-center justify-center">
+          <div class="flex justify-center items-center gap-x-4 lg:w-2/4 w-full">
+            <label class="w-1/4 text-center text-lg font-semibold">Income:</label>
+            <input id="income-input"
+                   class="bg-gray-200 w-3/4 basis-11/12 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
                    type="text">
           </div>
           <h4 class="text-xl font-semibold text-center my-3">Expenses</h4>
-          <div class="flex justify-center items-center gap-x-4 mb-4">
-            <label class="w-1/4 text-right text-lg font-semibold">Food:</label>
-            <input class="bg-gray-200 w-3/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
+          <div class="flex justify-center items-center gap-x-4 mb-4 lg:w-2/4 w-full">
+            <label class="w-1/4 text-center text-lg font-semibold">Food:</label>
+            <input id="food-input"
+                   class="bg-gray-200 w-3/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
                    type="text">
           </div>
-          <div class="flex justify-center items-center gap-x-4 mb-4">
-            <label class="w-1/4 text-right text-lg font-semibold">Rent:</label>
-            <input class="bg-gray-200 w-3/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
+          <div class="flex justify-center items-center gap-x-4 mb-4 lg:w-2/4 w-full">
+            <label class="w-1/4 text-center text-lg font-semibold">Rent:</label>
+            <input id="rent-input"
+                   class="bg-gray-200 w-3/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
                    type="text">
           </div>
-          <div class="flex justify-center items-center gap-x-4 mb-4">
-            <label class="w-1/4 text-right text-lg font-semibold">Cothes:</label>
-            <input class="bg-gray-200 w-3/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
+          <div class="flex justify-center items-center gap-x-4 mb-4 lg:w-2/4 w-full">
+            <label class="w-1/4 text-center text-lg font-semibold">Clothes:</label>
+            <input id="clothes-input"
+                   class="bg-gray-200 w-3/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
                    type="text">
           </div>
-          <div class="flex justify-center items-center gap-x-4 mb-4">
-            <button type="button"
+          <div class="flex justify-center items-center gap-x-4 mb-4 lg:w-2/4 w-full">
+            <button id="calculate-btn" type="button"
                     class="block text-white bg-blue-500 hover:bg-blue-600 font-medium rounded text-lg px-6 py-2 text-center">Calculate</button>
           </div>
           <!-- Total Section -->
-          <div class="flex justify-center flex-col items-center gap-x-4 mb-4">
+          <div class="flex justify-center flex-col items-center gap-x-4 mb-4 lg:w-2/4 w-full">
             <!-- alert -->
-            <div class="flex justify-center items-center rounded bg-red-500 text-white text- font-semibold px-4 py-3">
-              <p>Something happened that you should know about.</p>
+            <div id="error"
+                 class="flex justify-center items-center rounded bg-red-500 text-white text- font-semibold px-4 py-3 hidden">
+              <p></p>
             </div>
-            <h3 class="text-xl font-bold mt-4">Total Expenses: <span>00</span></h3>
-            <h3 class="text-xl font-bold my-3">Balance: <span>00</span></h3>
+            <h3 class="text-xl font-bold mt-4">Total Expenses: <span id="total-expenses">00</span></h3>
+            <h3 class="text-xl font-bold my-3">Balance: <span id="balance">00</span></h3>
           </div>
           <!-- Saving Section -->
-          <div class="flex justify-center items-center gap-x-4 mb-4">
+          <div class="flex justify-center items-center gap-x-4 mb-4 lg:w-2/4 w-full">
             <label class="w-1/4 text-right text-lg font-semibold">Saving:</label>
-            <input class="bg-gray-200 w-1/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
+            <input id="saving-input"
+                   class="bg-gray-200 w-1/4 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
                    type="text">
             <label>%</label>
-            <button type="button"
-                    class="block text-white bg-blue-500 hover:bg-blue-600 font-medium rounded text-lg px-6 py-2 text-center">Calculate</button>
+            <button id="saving-btn" type="button"
+                    class="block text-white bg-blue-500 hover:bg-blue-600 font-medium rounded text-lg px-6 py-2 text-center">Save</button>
           </div>
-          <div class="flex justify-center flex-col items-center gap-x-4 mb-4">
-            <h3 class="text-xl font-bold mt-4">Saving Amount: <span>00</span></h3>
-            <h3 class="text-xl font-bold my-3">Remaining Balance: <span>00</span></h3>
+          <div class="flex justify-center flex-col items-center gap-x-4 mb-4 lg:w-2/4 w-full">
+            <h3 class="text-xl font-bold mt-4">Saving Amount: <span id="saving-amount">00</span></h3>
+            <h3 class="text-xl font-bold my-3">Remaining Balance: <span id="remaining-balance">00</span></h3>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- Script -->
+  <script src="./js/moeny-tracker.js"></script>
 </body>
 
 </html>
