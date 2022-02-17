@@ -21,6 +21,8 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   //   Caught Error
   const error = document.getElementById("error");
 
+  // error condition
+
   if (isNaN(income)) {
     error.style.display = "block";
     error.innerText = "Please Input Income In Number.";
@@ -67,9 +69,9 @@ document.getElementById("saving-btn").addEventListener("click", function () {
   //   Caught Error
   const savingError = document.getElementById("saving-error");
 
-  const saving = (savingInput / 100) * income;
+  const saving = (savingInput / 100) * balance;
   const remaining = balance - saving;
-
+  // saving amount error condition
   if (savingInput.length == 0) {
     savingError.style.display = "block";
     savingError.innerText = "Please Input 0 or some number.";
