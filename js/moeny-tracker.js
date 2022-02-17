@@ -3,61 +3,90 @@ function getInputValue(inputField) {
   getInput = document.getElementById(inputField);
   getInputAmount = getInput.value;
   getInputNum = parseFloat(getInputAmount);
-  if (!isNaN(getInputNum)) {
-    return getInputNum;
-  } else {
-    return;
-  }
+  return getInputNum;
 }
-
-// Get Tag InnerText
-// function targetDisplay(tagId) {
-//   const getTag = document.getElementById(tagId).innerHTML;
-//   const getTagValue = parseFloat(getTag);
-//   return getTagValue;
-// }
-
-// Calculate Button Event
+// Calculate button event handeler
 document.getElementById("calculate-btn").addEventListener("click", function () {
   //get income
   const income = getInputValue("income-input");
+
   // get expenses amount
   const food = getInputValue("food-input");
   const rent = getInputValue("rent-input");
   const clothes = getInputValue("clothes-input");
-  // total expenses sum
-  const totalExpensesSum = food + rent + clothes;
-  // condition
-  if (!isNaN(totalExpensesSum)) {
-    // show total expenses
-    const totalExpenses = document.getElementById("total-expenses");
+
+  const totalExpenses = document.getElementById("total-expenses");
+  const balance = document.getElementById("balance");
+
+  //   Caught Error
+  const error = document.getElementById("error");
+
+  if (isNaN(income)) {
+    error.style.display = "block";
+    error.innerText = "Please Input Income In Number.";
+    totalExpenses.innerText = "N/A";
+    balance.innerText = "N/A";
+  } else if (income == 0) {
+    error.style.display = "block";
+    error.innerText = "Please Input Al Least Some Income.";
+    totalExpenses.innerText = "N/A";
+    balance.innerText = "N/A";
+  } else if (isNaN(food) || isNaN(rent) || isNaN(clothes)) {
+    error.style.display = "block";
+    error.innerText = "Please Input Number Only.";
+    totalExpenses.innerText = "N/A";
+    balance.innerText = "N/A";
+  } else if (food < 0 || rent < 0 < clothes < 0) {
+    error.style.display = "block";
+    error.innerText = "Please Input Positive Number.";
+    totalExpenses.innerText = "N/A";
+    balance.innerText = "N/A";
+  } else if (food + rent + clothes > income) {
+    error.style.display = "block";
+    error.innerText = "Your Income exceede Expenses.";
+    totalExpenses.innerText = "N/A";
+    balance.innerText = "N/A";
+  } else {
+    error.style.display = "none";
+    const totalExpensesSum = food + rent + clothes;
     totalExpenses.innerText = totalExpensesSum;
-    // get Balance
-    const balance = document.getElementById("balance");
-    // const balanceNum = parseFloat(balance);
     const balanceAfterExpenses = income - totalExpensesSum;
     balance.innerText = balanceAfterExpenses;
-    error.style.display = "none";
-  } else if (income > totalExpensesSum) {
-    const error = document.getElementById("error");
-    error.innerText = "Expense amount bigger than your income";
-    error.style.display = "block";
-  } else {
-    const error = document.getElementById("error");
-    error.innerText = "Please give number";
-    error.style.display = "block";
   }
 });
+
 // Saving buton event
-document.getElementById('saving-btn').addEventListener('click', function () {
-  const savingInput = getInputValue('saving-input');
-  const income = getInputValue('income-input');
-  const balance = getInputValue('balance');
-  const savingAmount = document.getElementById('saving-amount');
-  const remainingBalance = document.getElementById('reamining-balance');
-  // const remainingText = parseFloat(remainingBalance);
-  const saving = (savingInput / 100) * income;
-  savingAmount.innerText = saving;
-  const remaining = balance - saving;
-  console.log(remaining);
+document.getElementById("saving-btn").addEventListener("click", function () {
+  const savingInput = getInputValue("saving-input");
+  const income = getInputValue("income-input");
+  const balance = document.getElementById("balance").innerText;
+
+  const savingAmount = document.getElementById("saving-amount");
+  const remainingBalance = document.getElementById("remaining-balance");
+
+  //   Caught Error
+  const savingError = document.getElementById("saving-error");
+  if (savingInput.length == 0) {
+    savingError.style.display = "block";
+    savingError.innerText = "Please Input 0 or some number.";
+    savingAmount.innerText = "N/A";
+    remainingBalance.innerText = "N/A";
+  } else if (isNaN(savingInput)) {
+    savingError.style.display = "block";
+    savingError.innerText = "Please Input Number Only.";
+    savingAmount.innerText = "N/A";
+    remainingBalance.innerText = "N/A";
+  } else if (savingInput < 0) {
+    savingError.style.display = "block";
+    savingError.innerText = "Please Input Positive Number.";
+    savingAmount.innerText = "N/A";
+    remainingBalance.innerText = "N/A";
+  } else {
+    savingError.style.display = "none";
+    const saving = (savingInput / 100) * income;
+    const remaining = balance - saving;
+
+    savingAmount.innerText = saving;
+    remainingBalance.innerText = remaining;
+  }
 });
