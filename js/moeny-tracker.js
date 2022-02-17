@@ -55,7 +55,7 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   }
 });
 
-// Saving buton event
+// Saving buton event handeler
 document.getElementById("saving-btn").addEventListener("click", function () {
   const savingInput = getInputValue("saving-input");
   const income = getInputValue("income-input");
@@ -66,6 +66,10 @@ document.getElementById("saving-btn").addEventListener("click", function () {
 
   //   Caught Error
   const savingError = document.getElementById("saving-error");
+
+  const saving = (savingInput / 100) * income;
+  const remaining = balance - saving;
+
   if (savingInput.length == 0) {
     savingError.style.display = "block";
     savingError.innerText = "Please Input 0 or some number.";
@@ -81,11 +85,13 @@ document.getElementById("saving-btn").addEventListener("click", function () {
     savingError.innerText = "Please Input Positive Number.";
     savingAmount.innerText = "N/A";
     remainingBalance.innerText = "N/A";
+  } else if (balance < saving) {
+    savingError.style.display = "block";
+    savingError.innerText = "Please Input Less Percentage. Your saving exceede your balance.";
+    savingAmount.innerText = "N/A";
+    remainingBalance.innerText = "N/A";
   } else {
     savingError.style.display = "none";
-    const saving = (savingInput / 100) * income;
-    const remaining = balance - saving;
-
     savingAmount.innerText = saving;
     remainingBalance.innerText = remaining;
   }
